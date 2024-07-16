@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Interactive Quiz Generator&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 800px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>textarea {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 150px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#text-display {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#text-display span {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#text-display span:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f0f0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>select {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#result {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(0,0,0,0.4);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fefefe;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 15% auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #888;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 80%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.close {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #aaa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>float: right;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.close:hover,</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.close:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: black;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#share-code {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="loadSharedQuiz()"&gt;Load Shared Quiz&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Interactive Quiz Generator&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="quiz-creator" style="display: block;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;textarea id="input-text" placeholder="Paste your text here..."&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="processText()"&gt;Process Text&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="text-display"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="generateShareCode()" style="display:none;" id="share-button"&gt;Generate Share Code&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" id="share-code" readonly style="display:none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="quiz-taker" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="quiz-content"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="checkAnswers()" id="check-answers"&gt;Check Answers&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="result"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="myModal" class="modal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="modal-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="close"&gt;&amp;times;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Enter wrong answers&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Correct answer: &lt;span id="correct-answer"&gt;&lt;/span&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="wrong1" placeholder="Wrong answer 1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="wrong2" placeholder="Wrong answer 2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="wrong3" placeholder="Wrong answer 3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="submitWrongAnswers()"&gt;Submit&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let correctAnswers = {};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let questionCount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentSpan = null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentWord = null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentIndex = null;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let quizData = {};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function processText() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const text = document.getElementById('input-text').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const words = text.split(/\s+/);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const displayDiv = document.getElementById('text-display');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>displayDiv.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>words.forEach((word, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const span = document.createElement('span');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>span.textContent = word + ' ';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>span.onclick = () =&gt; openModal(span, word, index);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>displayDiv.appendChild(span);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('share-button').style.display = 'inline-block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function openModal(span, word, index) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentSpan = span;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentWord = word;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentIndex = index;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('correct-answer').textContent = word;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('myModal').style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('wrong1').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('wrong2').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('wrong3').value = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function submitWrongAnswers() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const wrong1 = document.getElementById('wrong1').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const wrong2 = document.getElementById('wrong2').value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const wrong3 = document.getElementById('wrong3').value;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (wrong1 &amp;&amp; wrong2 &amp;&amp; wrong3) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>createGap(currentSpan, currentWord, currentIndex, [wrong1, wrong2, wrong3]);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('myModal').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('Please enter all three wrong answers.');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function createGap(span, word, index, wrongAnswers) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>questionCount++;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selectId = `q${questionCount}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>correctAnswers[selectId] = word;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const select = document.createElement('select');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>select.id = selectId;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const options = [word, ...wrongAnswers];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>shuffleArray(options);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>options.unshift('Choose...');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>options.forEach(option =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const optionElement = document.createElement('option');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionElement.value = option;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionElement.textContent = option;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>select.appendChild(optionElement);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>span.parentNode.replaceChild(select, span);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Store quiz data</p>
+<p class="p1"><span class="Apple-converted-space">            </span>quizData[selectId] = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>correct: word,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: options.slice(1)<span class="Apple-converted-space">  </span>// Exclude 'Choose...'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function shuffleArray(array) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = array.length - 1; i &gt; 0; i--) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const j = Math.floor(Math.random() * (i + 1));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>[array[i], array[j]] = [array[j], array[i]];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function checkAnswers() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let score = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let total = Object.keys(correctAnswers).length;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let question in correctAnswers) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (document.getElementById(question).value === correctAnswers[question]) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>score++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById("result").innerHTML = `Your score: ${score} out of ${total}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function generateShareCode() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const quizJSON = JSON.stringify(quizData);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const shareCode = btoa(quizJSON); // Encode the JSON as base64</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('share-code').value = shareCode;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('share-code').style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadSharedQuiz() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const shareCode = prompt("Enter the share code for the quiz:");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (shareCode) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const quizJSON = atob(shareCode); // Decode the base64 string</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const loadedQuizData = JSON.parse(quizJSON);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById('quiz-creator').style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById('quiz-taker').style.display = 'block';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const quizContent = document.getElementById('quiz-content');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>quizContent.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>for (let questionId in loadedQuizData) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const questionData = loadedQuizData[questionId];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const select = document.createElement('select');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>select.id = questionId;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const options = ['Choose...', ...questionData.options];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>options.forEach(option =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const optionElement = document.createElement('option');</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>optionElement.value = option;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>optionElement.textContent = option;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>select.appendChild(optionElement);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>quizContent.appendChild(select);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>quizContent.appendChild(document.createTextNode(' '));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>correctAnswers[questionId] = questionData.correct;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>alert("Invalid share code. Please try again.");</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Close modal when clicking on &lt;span&gt; (x)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementsByClassName("close")[0].onclick = function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('myModal').style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Close modal when clicking outside of it</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onclick = function(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (event.target == document.getElementById('myModal')) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('myModal').style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
